@@ -1,3 +1,6 @@
+// my code from before review
+//THERE IS MORE THAN ONE WAY TO SOLVE THIS PROBLEM
+
 let addToy = false;
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -23,7 +26,7 @@ document.addEventListener("DOMContentLoaded", () => {
     .then( r => r.json())
     .then(resObj => {
       resObj.forEach(createToyCard)
-      //for delegation
+      //for delegation - add event listener to buttons
       // addEventsToLikeButtons()
     })
   }
@@ -47,8 +50,12 @@ document.addEventListener("DOMContentLoaded", () => {
   //with closure can add event listener directly to button when creating it
 
   // addEventsToLikeButtons = () => {
+  //   //grabbing all of the like buttons
+  //   //doing this first
   //   const likeButtons = document.querySelectorAll(".like-btn")
   
+  //   //event function for each button
+  //   //doing this fourth
   //   likeButtonEvent = (event) => {
   //     const likesP = event.target.previousElementSibling
   //     const toyID = event.target.parentElement.dataset.id
@@ -70,10 +77,14 @@ document.addEventListener("DOMContentLoaded", () => {
   //     })
   //   }
   
+  //   //callback function for adding event listener
+  //   //doing this third
   //   addEventToButtons = (button) => {
   //     button.addEventListener("click", likeButtonEvent)
   //   }
   
+  //   //iterating through all like buttons and adding event listener
+  //   //doing this second
   //   likeButtons.forEach(addEventToButtons)
   // }
 
@@ -125,6 +136,7 @@ document.addEventListener("DOMContentLoaded", () => {
    likeButton.className = "like-btn"
    likeButton.innerText = "Like <3"
 
+   //adding event listener directly to like button
    likeButton.addEventListener("click", likeButtonEvent)
 
    cardDiv.append(nameHeader, toyImage, pLikes, likeButton)
@@ -136,6 +148,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const newToyForm = document.querySelector(".add-toy-form")
 
 
+  //event listener callback for new toy form
   newToyFormEvent = (event) => {
     event.preventDefault()
     const newToyObj = {
@@ -166,6 +179,7 @@ document.addEventListener("DOMContentLoaded", () => {
     .then(r => r.json())
     .then(resObj => {
       createToyCard(resObj)
+      //for delegation - add event listener to buttons
       // addEventsToLikeButtons()
     })
   }
