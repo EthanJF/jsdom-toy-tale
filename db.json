@@ -4,7 +4,7 @@
       "id": 1,
       "name": "Woody",
       "image": "http://www.pngmart.com/files/3/Toy-Story-Woody-PNG-Photos.png",
-      "likes": 17
+      "likes": 25
     },
     {
       "id": 2,
@@ -51,7 +51,7 @@
     {
       "name": "Jessie",
       "image": "https://vignette.wikia.nocookie.net/toystorymerchandise/images/7/7e/Jessierender.jpg/revision/latest?cb=20191020221145",
-      "likes": 6,
+      "likes": 11,
       "id": 9
     }
   ]

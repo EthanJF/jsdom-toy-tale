@@ -23,7 +23,8 @@ document.addEventListener("DOMContentLoaded", () => {
     .then( r => r.json())
     .then(resObj => {
       resObj.forEach(createToyCard)
-      addEventsToLikeButtons()
+      //for delegation
+      // addEventsToLikeButtons()
     })
   }
 
@@ -39,6 +40,70 @@ document.addEventListener("DOMContentLoaded", () => {
   //     </div>
   //   `
   // }
+
+  //add likes
+
+  //can use this for delegation and closure
+  //with closure can add event listener directly to button when creating it
+
+  // addEventsToLikeButtons = () => {
+  //   const likeButtons = document.querySelectorAll(".like-btn")
+  
+  //   likeButtonEvent = (event) => {
+  //     const likesP = event.target.previousElementSibling
+  //     const toyID = event.target.parentElement.dataset.id
+      
+  //     fetch(`http://localhost:3000/toys/${toyID}`, {
+  //       method: "PATCH",
+  //       headers: 
+  //       {
+  //         "Content-Type": "application/json",
+  //         Accept: "application/json"
+  //       },
+  //       body: JSON.stringify({
+  //         "likes": parseInt(likesP.innerText) + 1
+  //       })
+  //     })
+  //     .then( r => r.json())
+  //     .then(resObj => {
+  //       likesP.innerText = `${resObj.likes} likes`
+  //     })
+  //   }
+  
+  //   addEventToButtons = (button) => {
+  //     button.addEventListener("click", likeButtonEvent)
+  //   }
+  
+  //   likeButtons.forEach(addEventToButtons)
+  // }
+
+  //with closure
+  //add likes
+  likeButtonEvent = (event) => {
+    const likesP = event.target.previousElementSibling
+    const toyID = event.target.parentElement.dataset.id
+    
+    fetch(`http://localhost:3000/toys/${toyID}`, {
+      method: "PATCH",
+      headers: 
+      {
+        "Content-Type": "application/json",
+        Accept: "application/json"
+      },
+      body: JSON.stringify({
+        "likes": parseInt(likesP.innerText) + 1
+      })
+    })
+    .then( r => r.json())
+    .then(resObj => {
+      likesP.innerText = `${resObj.likes} likes`
+    })
+  }
+
+  addEventToButtons = (button) => {
+    button.addEventListener("click", likeButtonEvent)
+  }
+
 
   //closure
   createToyCard = (toyObj) => {
@@ -59,6 +124,8 @@ document.addEventListener("DOMContentLoaded", () => {
    const likeButton = document.createElement("button")
    likeButton.className = "like-btn"
    likeButton.innerText = "Like <3"
+
+   likeButton.addEventListener("click", likeButtonEvent)
 
    cardDiv.append(nameHeader, toyImage, pLikes, likeButton)
    toyCollectionDiv.append(cardDiv)
@@ -99,45 +166,9 @@ document.addEventListener("DOMContentLoaded", () => {
     .then(r => r.json())
     .then(resObj => {
       createToyCard(resObj)
-      addEventsToLikeButtons()
+      // addEventsToLikeButtons()
     })
   }
-
-  //add likes
-
-  //can use this for delegation and closure
-  //with closure can add event listener directly to button when creating it
-  addEventsToLikeButtons = () => {
-    const likeButtons = document.querySelectorAll(".like-btn")
-  
-    likeButtonEvent = (event) => {
-      const likesP = event.target.previousElementSibling
-      const toyID = event.target.parentElement.dataset.id
-      
-      fetch(`http://localhost:3000/toys/${toyID}`, {
-        method: "PATCH",
-        headers: 
-        {
-          "Content-Type": "application/json",
-          Accept: "application/json"
-        },
-        body: JSON.stringify({
-          "likes": parseInt(likesP.innerText) + 1
-        })
-      })
-      .then( r => r.json())
-      .then(resObj => {
-        likesP.innerText = `${resObj.likes} likes`
-      })
-    }
-  
-    addEventToButtons = (button) => {
-      button.addEventListener("click", likeButtonEvent)
-    }
-  
-    likeButtons.forEach(addEventToButtons)
-  }
-
 
 
   getToys()
