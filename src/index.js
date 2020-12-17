@@ -16,6 +16,8 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
+  //NEW CODE
+
 
   //initial fetch request to get all toys
   getToys = () => {
@@ -37,6 +39,8 @@ document.addEventListener("DOMContentLoaded", () => {
     const likes = parseInt(pLikes.textContent) + 1
     const id = event.target.dataset.id
 
+    // we're getting the fetchAPIURL from the constants/index.js file
+    //THIS IS OPTIONAL
     fetch(`${fetchAPIURL}/${id}`, {
       method: "PATCH",
       headers: 
@@ -64,6 +68,7 @@ document.addEventListener("DOMContentLoaded", () => {
       method: "DELETE"
     })
     .then(toyDiv.remove())
+    //pessimistically removing toyDiv
   }
 
   //closure
@@ -102,15 +107,15 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   //delegation
-  createToyCard = (toyObj) => {
-    toyList.innerHTML += `
-      <div class="card" dataset-id=${toyObj.id}>
-        <h2>${toyObj.name}</h2>
-        <img src=${toyObj.image} class="toy-avatar" />
-        <p>${toyObj.likes} Likes </p>
-        <button class="like-btn">Like <3</button>
-      </div>
-    `
+  // createToyCard = (toyObj) => {
+  //   toyList.innerHTML += `
+  //     <div class="card" dataset-id=${toyObj.id}>
+  //       <h2>${toyObj.name}</h2>
+  //       <img src=${toyObj.image} class="toy-avatar" />
+  //       <p>${toyObj.likes} Likes </p>
+  //       <button class="like-btn">Like <3</button>
+  //     </div>
+  //   `
   // }
 
   //getting toy form dom element
