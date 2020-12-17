@@ -26,12 +26,10 @@ document.addEventListener("DOMContentLoaded", () => {
     .then( r => r.json())
     .then(resObj => {
       resObj.forEach(createToyCard)
-      //for delegation - add event listener to buttons
-      // addEventsToLikeButtons()
     })
   }
 
-
+  // UNCOMMENT LINES 34 - 70 FOR DELEGATION EXAMPLE
   // delegation with innerHTML
   // createToyCard = (toyObj) => {
   //   toyCollectionDiv.innerHTML += `
@@ -44,19 +42,10 @@ document.addEventListener("DOMContentLoaded", () => {
   //   `
   // }
 
-  //add likes
-
-  //can use this for delegation and closure
-  //with closure can add event listener directly to button when creating it
-
-  // addEventsToLikeButtons = () => {
-  //   //grabbing all of the like buttons
-  //   //doing this first
-  //   const likeButtons = document.querySelectorAll(".like-btn")
-  
-  //   //event function for each button
-  //   //doing this fourth
-  //   likeButtonEvent = (event) => {
+  // //add likes
+  // // with delegation
+  // toyCollectionDivEvents = (event) => {
+  //   if(event.target.className == "like-btn"){
   //     const likesP = event.target.previousElementSibling
   //     const toyID = event.target.parentElement.dataset.id
       
@@ -75,18 +64,10 @@ document.addEventListener("DOMContentLoaded", () => {
   //     .then(resObj => {
   //       likesP.innerText = `${resObj.likes} likes`
   //     })
-  //   }
-  
-  //   //callback function for adding event listener
-  //   //doing this third
-  //   addEventToButtons = (button) => {
-  //     button.addEventListener("click", likeButtonEvent)
-  //   }
-  
-  //   //iterating through all like buttons and adding event listener
-  //   //doing this second
-  //   likeButtons.forEach(addEventToButtons)
+  //   } 
   // }
+
+  // toyCollectionDiv.addEventListener("click", toyCollectionDivEvents)
 
   //with closure
   //add likes
@@ -117,6 +98,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
   //closure
+  //create each toy card
   createToyCard = (toyObj) => {
    const cardDiv = document.createElement("div")
    cardDiv.className = "card"
@@ -143,7 +125,7 @@ document.addEventListener("DOMContentLoaded", () => {
    toyCollectionDiv.append(cardDiv)
   }
 
-  //grab from from DOM
+  //grab form from DOM
 
   const newToyForm = document.querySelector(".add-toy-form")
 
@@ -152,8 +134,8 @@ document.addEventListener("DOMContentLoaded", () => {
   newToyFormEvent = (event) => {
     event.preventDefault()
     const newToyObj = {
-      name: event.target.children[1].value,
-      image: event.target.children[3].value
+      name: event.target.name.value,
+      image: event.target.image.value
     }
 
     postNewToy(newToyObj)
@@ -179,8 +161,6 @@ document.addEventListener("DOMContentLoaded", () => {
     .then(r => r.json())
     .then(resObj => {
       createToyCard(resObj)
-      //for delegation - add event listener to buttons
-      // addEventsToLikeButtons()
     })
   }
 
